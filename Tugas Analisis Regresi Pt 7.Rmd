@@ -1,0 +1,231 @@
+---
+title: "Tugas Individu Analisis Regresi Pt 7"
+author: "Thufaillah Ulfah J"
+date: "2024-03-05"
+output:
+  word_document: default
+  html_document: default
+  pdf_document: default
+editor_options: null
+markdown: null
+wrap: 72
+---
+
+# Library
+
+```{r}
+library(readxl)
+library(dplyr)
+library(plotly)
+library(lmtest)
+library(car)
+library(randtests)
+library(lmtest)
+```
+
+# Data
+
+```{r}
+data <- read_xlsx("C:\\Users\\MyBook Hype\\Downloads\\Data anreg pt7 .xlsx")
+data
+```
+
+# Model Regresi
+
+```{r}
+model1 = lm(formula = Y ~ X, data)
+summary(model1)
+model1
+```
+Didapatkan Model Regresi sebagai berikut: $$ \hat Y = 46.4604 - 0.7525X $$ Model tersebut belum dikatakan sebagai model terbaik karena belum melalui eksplorasi data dan serangkaian uji asumsi serta normalitas untuk memperoleh model yang optimal.
+
+```{r}
+plot(x=data$X,y=data$Y)
+```
+
+Berdasarkan plot tersebut, dapat disimpulkan bahwa hubungan antara X dan Y tidak linear.
+
+# Pemeriksaan Asumsi
+
+## Eksplorasi Kondisi Gauss-Markov
+
+### Plot sisaan vs Y duga
+
+```{r}
+plot(model1,1) 
+```
+
+Berdasarkan plot sisaan vs Y, terlihat sisaan berada di sekitar nilai 0,menunjukkan nilai harapan galat adalah nol. Namun, lebar pita untuk setiap nilai dugaan perlu di uji lebih lanjut untuk mengetahui ragamnnya homogen atau tidak. Bentuk pola yang didapat yaitu pola kurva, artinya model kurva tidak pas sehingga perlu suku lain dalam model atau transformasi terhadap Y
+
+## Plot sisaan vs urutan
+
+```{r}
+plot(x = 1:dim(data)[1],
+     y = model1$residuals,
+     type = 'b', 
+     ylab = "Residuals",
+     xlab = "Observation")
+```
+
+Berdasarkan plot sisaan vs urutan, terlihat tebarannya berpola, sehingga sisaan tidak saling bebas dan model tidak pas
+
+## Eksplorasi Normalitas Sisaan dengan QQ-plot
+
+```{r}
+plot(model1,2)
+```
+
+# Uji Formal Kondisi Gauss-Markov
+
+## 1. Nilai harapan sisaan sama dengan nol
+
+$$
+H_0 : \text{Sisaan menyebar normal}\\H_1 : \text{Sisaan tidak menyebar normal}
+$$
+
+```{r}
+t.test(model1$residuals,mu = 0,conf.level = 0.95)
+```
+
+Diketahui bahwa p-value \> alpha, sehingga tak tolak $H_0$. Oleh karena itu,dapat disimpulkan bahwa nilai harapan sisaan sama dengan nol
+
+## 2.Ragam sisaan homogen
+
+$$
+H_0 : \text{Ragam sisaan homogen}\\H_1 : \text{Ragam sisaan tidak homogen}
+$$
+
+```{r}
+bptest(model1)
+```
+
+Diketahui bahwa p-value \> alpha, sehingga tak tolak $H_0$. Oleh karena itu,dapat disimpulkan bahwa ragam sisaan homogen
+
+## 3. Sisaan saling bebas
+
+$$
+H_0 : \text{Sisaan saling bebas}\\H_1 : \text{Sisaan tidak saling bebas}
+$$
+
+```{r}
+dwtest(model1)
+```
+
+Diketahui bahwa p-value \< alpha, sehingga tolak $H_0$. Oleh karena itu,dapat disimpulkan bahwa sisaan tidak saling bebas
+
+# Uji Formal Normalitas Sisaan
+
+$$
+H_0 : \text{Sisaan menyebar normal}\\H_1 : \text{Sisaan tidak menyebar normal}
+$$
+
+```{r}
+shapiro.test(model1$residuals)
+```
+
+Berdasarkan Shapiro-Wilk normality test diketahui bahwa p-value \> alpha, sehingga tak tolak $H_0$. Oleh karena itu, dapat disimpulkan bahwa sisaan menyebar normal.
+
+Berdasarkan Serangkaian Uji Formal Kondisi Gauss-Markov dan Uji Formal Normalitas Sisaan didapatkan pelanggaran asumsi Gauss-Markov yaitu, tidak adanya autokorelasi. Karena didapatkan p-value \< alpha artinya sisaan tidak saling bebas yang seharusnya sisaan saling bebas.
+
+# Transformasi Data
+
+# Data Transformasi
+
+```{r}
+Y = sqrt(data$Y)
+X = sqrt(data$X)
+data2 <- data_frame(X,Y)
+data2
+```
+
+# Model Regresi
+
+```{r}
+model2 = lm(formula = Y ~ X, data2)
+summary(model2)
+model2
+```
+
+Didapatkan Model Regresi sebagai berikut: $$\hat Y = 8.7125-0.8134X$$
+
+#Eksplorasi \## Plot Hubungan X dan Y Asumsi bentuk model regresi linear sederhana dengan plot antara X dan Y
+
+```{r}
+plot(x=data2$X,y=data2$Y)
+```
+
+# Pemeriksaan Asumsi
+
+## Eksplorasi Kondisi Gauss-Markov
+
+### Plot sisaan vs Y duga
+
+```{r}
+plot(model2,1) 
+```
+
+## Plot sisaan vs urutan
+
+```{r}
+plot(x = 1:dim(data2)[1],
+     y = model2$residuals,
+     type = 'b', 
+     ylab = "Residuals",
+     xlab = "Observation")
+```
+
+## Eksplorasi Normalitas Sisaan dengan QQ-plot
+
+```{r}
+plot(model2,2)
+```
+
+# Uji Formal Kondisi Gauss-Markov
+
+## 1. Nilai harapan sisaan sama dengan nol
+
+$$
+H_0 : \text{Nilai harapan sisaan sama dengan 0}\\H_1 : \text{Nilai harapan tidak sama dengan 0}
+$$
+
+```{r}
+t.test(model2$residuals,mu = 0,conf.level = 0.95)
+```
+
+Diketahui bahwa p-value \> alpha, sehingga tak tolak $H_0$. Oleh karena itu,dapat disimpulkan bahwa nilai harapan sisaan sama dengan nol
+
+## 2.Ragam sisaan homogen
+
+$$
+H_0 : \text{Ragam sisaan homogen}\\H_1 : \text{Ragam sisaan tidak homogen}
+$$
+
+```{r}
+ncvTest(model2)
+```
+
+Diketahui bahwa p-value \> alpha, sehingga tak tolak $H_0$. Oleh karena itu,dapat disimpulkan bahwa ragam sisaan homogen
+
+## 3. Sisaan saling bebas
+
+$$
+H_0 : \text{Sisaan saling bebas}\\H_1 : \text{Sisaan tidak saling bebas}
+$$
+
+```{r}
+dwtest(model2)
+```
+
+Diketahui bahwa p-value \> alpha, sehingga tak tolak $H_0$. Oleh karena itu,dapat disimpulkan bahwa sisaan saling bebas
+
+# Uji Formal Normalitas Sisaan
+
+$$ H_0 : \text{Sisaan menyebar normal}\\H_1 : \text{Sisaan tidak menyebar normal} $$
+
+```{r}
+shapiro.test(model2$residuals)
+```
+
+Berdasarkan Shapiro-Wilk normality test diketahui bahwa p-value \> alpha, sehingga tak tolak $H_0$. Oleh karena itu, dapat disimpulkan bahwa sisaan menyebar normal.
+
+Berdasarkan transformasi yang telah dilakukan didapat model regresi yang lebih baik dan efektif disertai dengan semua asumsi Gauss Markov dan Normalitas sudah terpenuhi dalam analisis regresi linear sederhana. Sehingga model regresi terbaik dari data ini adalah: $$\hat Y = 8.7125-0.8134X$$
