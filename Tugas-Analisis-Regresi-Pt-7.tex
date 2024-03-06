@@ -1,0 +1,761 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Tugas Individu Analisis Regresi Pt 7},
+  pdfauthor={Thufaillah Ulfah J},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Tugas Individu Analisis Regresi Pt 7}
+\author{Thufaillah Ulfah J}
+\date{2024-03-05}
+
+\begin{document}
+\maketitle
+
+\hypertarget{library}{%
+\section{Library}\label{library}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(readxl)}
+\FunctionTok{library}\NormalTok{(dplyr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'dplyr'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(plotly)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: ggplot2
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'plotly'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:ggplot2':
+## 
+##     last_plot
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:stats':
+## 
+##     filter
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:graphics':
+## 
+##     layout
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(lmtest)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'lmtest' was built under R version 4.3.3
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: zoo
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'zoo'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:base':
+## 
+##     as.Date, as.Date.numeric
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(car)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: carData
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'car'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:dplyr':
+## 
+##     recode
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(randtests)}
+\FunctionTok{library}\NormalTok{(lmtest)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{data}{%
+\section{Data}\label{data}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data }\OtherTok{\textless{}{-}} \FunctionTok{read\_xlsx}\NormalTok{(}\StringTok{"C:}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{Users}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{MyBook Hype}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{Downloads}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{Data anreg pt7 .xlsx"}\NormalTok{)}
+\NormalTok{data}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 15 x 2
+##        X     Y
+##    <dbl> <dbl>
+##  1     2    54
+##  2     5    50
+##  3     7    45
+##  4    10    37
+##  5    14    35
+##  6    19    25
+##  7    26    20
+##  8    31    16
+##  9    34    18
+## 10    38    13
+## 11    45     8
+## 12    52    11
+## 13    53     8
+## 14    60     4
+## 15    65     6
+\end{verbatim}
+
+\hypertarget{model-regresi}{%
+\section{Model Regresi}\label{model-regresi}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model1 }\OtherTok{=} \FunctionTok{lm}\NormalTok{(}\AttributeTok{formula =}\NormalTok{ Y }\SpecialCharTok{\textasciitilde{}}\NormalTok{ X, data)}
+\FunctionTok{summary}\NormalTok{(model1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = Y ~ X, data = data)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -7.1628 -4.7313 -0.9253  3.7386  9.0446 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) 46.46041    2.76218   16.82 3.33e-10 ***
+## X           -0.75251    0.07502  -10.03 1.74e-07 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 5.891 on 13 degrees of freedom
+## Multiple R-squared:  0.8856, Adjusted R-squared:  0.8768 
+## F-statistic: 100.6 on 1 and 13 DF,  p-value: 1.736e-07
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model1}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = Y ~ X, data = data)
+## 
+## Coefficients:
+## (Intercept)            X  
+##     46.4604      -0.7525
+\end{verbatim}
+
+Didapatkan Model Regresi sebagai berikut:
+\[ \hat Y = 46.4604 - 0.7525X \] Model tersebut belum dikatakan sebagai
+model terbaik karena belum melalui eksplorasi data dan serangkaian uji
+asumsi serta normalitas untuk memperoleh model yang optimal.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(}\AttributeTok{x=}\NormalTok{data}\SpecialCharTok{$}\NormalTok{X,}\AttributeTok{y=}\NormalTok{data}\SpecialCharTok{$}\NormalTok{Y)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Tugas-Analisis-Regresi-Pt-7_files/figure-latex/unnamed-chunk-4-1.pdf}
+
+Berdasarkan plot tersebut, dapat disimpulkan bahwa hubungan antara X dan
+Y tidak linear.
+
+\hypertarget{pemeriksaan-asumsi}{%
+\section{Pemeriksaan Asumsi}\label{pemeriksaan-asumsi}}
+
+\hypertarget{eksplorasi-kondisi-gauss-markov}{%
+\subsection{Eksplorasi Kondisi
+Gauss-Markov}\label{eksplorasi-kondisi-gauss-markov}}
+
+\hypertarget{plot-sisaan-vs-y-duga}{%
+\subsubsection{Plot sisaan vs Y duga}\label{plot-sisaan-vs-y-duga}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(model1,}\DecValTok{1}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Tugas-Analisis-Regresi-Pt-7_files/figure-latex/unnamed-chunk-5-1.pdf}
+
+Berdasarkan plot sisaan vs Y, terlihat sisaan berada di sekitar nilai
+0,menunjukkan nilai harapan galat adalah nol. Namun, lebar pita untuk
+setiap nilai dugaan perlu di uji lebih lanjut untuk mengetahui ragamnnya
+homogen atau tidak. Bentuk pola yang didapat yaitu pola kurva, artinya
+model kurva tidak pas sehingga perlu suku lain dalam model atau
+transformasi terhadap Y
+
+\hypertarget{plot-sisaan-vs-urutan}{%
+\subsection{Plot sisaan vs urutan}\label{plot-sisaan-vs-urutan}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(}\AttributeTok{x =} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{dim}\NormalTok{(data)[}\DecValTok{1}\NormalTok{],}
+     \AttributeTok{y =}\NormalTok{ model1}\SpecialCharTok{$}\NormalTok{residuals,}
+     \AttributeTok{type =} \StringTok{\textquotesingle{}b\textquotesingle{}}\NormalTok{, }
+     \AttributeTok{ylab =} \StringTok{"Residuals"}\NormalTok{,}
+     \AttributeTok{xlab =} \StringTok{"Observation"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Tugas-Analisis-Regresi-Pt-7_files/figure-latex/unnamed-chunk-6-1.pdf}
+
+Berdasarkan plot sisaan vs urutan, terlihat tebarannya berpola, sehingga
+sisaan tidak saling bebas dan model tidak pas
+
+\hypertarget{eksplorasi-normalitas-sisaan-dengan-qq-plot}{%
+\subsection{Eksplorasi Normalitas Sisaan dengan
+QQ-plot}\label{eksplorasi-normalitas-sisaan-dengan-qq-plot}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(model1,}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Tugas-Analisis-Regresi-Pt-7_files/figure-latex/unnamed-chunk-7-1.pdf}
+
+\hypertarget{uji-formal-kondisi-gauss-markov}{%
+\section{Uji Formal Kondisi
+Gauss-Markov}\label{uji-formal-kondisi-gauss-markov}}
+
+\hypertarget{nilai-harapan-sisaan-sama-dengan-nol}{%
+\subsection{1. Nilai harapan sisaan sama dengan
+nol}\label{nilai-harapan-sisaan-sama-dengan-nol}}
+
+\[
+H_0 : \text{Sisaan menyebar normal}\\H_1 : \text{Sisaan tidak menyebar normal}
+\]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{t.test}\NormalTok{(model1}\SpecialCharTok{$}\NormalTok{residuals,}\AttributeTok{mu =} \DecValTok{0}\NormalTok{,}\AttributeTok{conf.level =} \FloatTok{0.95}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  One Sample t-test
+## 
+## data:  model1$residuals
+## t = -4.9493e-16, df = 14, p-value = 1
+## alternative hypothesis: true mean is not equal to 0
+## 95 percent confidence interval:
+##  -3.143811  3.143811
+## sample estimates:
+##     mean of x 
+## -7.254614e-16
+\end{verbatim}
+
+Diketahui bahwa p-value \textgreater{} alpha, sehingga tak tolak
+\(H_0\). Oleh karena itu,dapat disimpulkan bahwa nilai harapan sisaan
+sama dengan nol
+
+\hypertarget{ragam-sisaan-homogen}{%
+\subsection{2.Ragam sisaan homogen}\label{ragam-sisaan-homogen}}
+
+\[
+H_0 : \text{Ragam sisaan homogen}\\H_1 : \text{Ragam sisaan tidak homogen}
+\]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{bptest}\NormalTok{(model1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  studentized Breusch-Pagan test
+## 
+## data:  model1
+## BP = 0.52819, df = 1, p-value = 0.4674
+\end{verbatim}
+
+Diketahui bahwa p-value \textgreater{} alpha, sehingga tak tolak
+\(H_0\). Oleh karena itu,dapat disimpulkan bahwa ragam sisaan homogen
+
+\hypertarget{sisaan-saling-bebas}{%
+\subsection{3. Sisaan saling bebas}\label{sisaan-saling-bebas}}
+
+\[
+H_0 : \text{Sisaan saling bebas}\\H_1 : \text{Sisaan tidak saling bebas}
+\]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dwtest}\NormalTok{(model1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Durbin-Watson test
+## 
+## data:  model1
+## DW = 0.48462, p-value = 1.333e-05
+## alternative hypothesis: true autocorrelation is greater than 0
+\end{verbatim}
+
+Diketahui bahwa p-value \textless{} alpha, sehingga tolak \(H_0\). Oleh
+karena itu,dapat disimpulkan bahwa sisaan tidak saling bebas
+
+\hypertarget{uji-formal-normalitas-sisaan}{%
+\section{Uji Formal Normalitas
+Sisaan}\label{uji-formal-normalitas-sisaan}}
+
+\[
+H_0 : \text{Sisaan menyebar normal}\\H_1 : \text{Sisaan tidak menyebar normal}
+\]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{shapiro.test}\NormalTok{(model1}\SpecialCharTok{$}\NormalTok{residuals)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Shapiro-Wilk normality test
+## 
+## data:  model1$residuals
+## W = 0.92457, p-value = 0.226
+\end{verbatim}
+
+Berdasarkan Shapiro-Wilk normality test diketahui bahwa p-value
+\textgreater{} alpha, sehingga tak tolak \(H_0\). Oleh karena itu, dapat
+disimpulkan bahwa sisaan menyebar normal.
+
+Berdasarkan Serangkaian Uji Formal Kondisi Gauss-Markov dan Uji Formal
+Normalitas Sisaan didapatkan pelanggaran asumsi Gauss-Markov yaitu,
+tidak adanya autokorelasi. Karena didapatkan p-value \textless{} alpha
+artinya sisaan tidak saling bebas yang seharusnya sisaan saling bebas.
+
+\hypertarget{transformasi-data}{%
+\section{Transformasi Data}\label{transformasi-data}}
+
+\hypertarget{data-transformasi}{%
+\section{Data Transformasi}\label{data-transformasi}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Y }\OtherTok{=} \FunctionTok{sqrt}\NormalTok{(data}\SpecialCharTok{$}\NormalTok{Y)}
+\NormalTok{X }\OtherTok{=} \FunctionTok{sqrt}\NormalTok{(data}\SpecialCharTok{$}\NormalTok{X)}
+\NormalTok{data2 }\OtherTok{\textless{}{-}} \FunctionTok{data\_frame}\NormalTok{(X,Y)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: `data_frame()` was deprecated in tibble 1.1.0.
+## i Please use `tibble()` instead.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+## generated.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 15 x 2
+##        X     Y
+##    <dbl> <dbl>
+##  1  1.41  7.35
+##  2  2.24  7.07
+##  3  2.65  6.71
+##  4  3.16  6.08
+##  5  3.74  5.92
+##  6  4.36  5   
+##  7  5.10  4.47
+##  8  5.57  4   
+##  9  5.83  4.24
+## 10  6.16  3.61
+## 11  6.71  2.83
+## 12  7.21  3.32
+## 13  7.28  2.83
+## 14  7.75  2   
+## 15  8.06  2.45
+\end{verbatim}
+
+\hypertarget{model-regresi-1}{%
+\section{Model Regresi}\label{model-regresi-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model2 }\OtherTok{=} \FunctionTok{lm}\NormalTok{(}\AttributeTok{formula =}\NormalTok{ Y }\SpecialCharTok{\textasciitilde{}}\NormalTok{ X, data2)}
+\FunctionTok{summary}\NormalTok{(model2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = Y ~ X, data = data2)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.42765 -0.17534 -0.05753  0.21223  0.46960 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  8.71245    0.19101   45.61 9.83e-16 ***
+## X           -0.81339    0.03445  -23.61 4.64e-12 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.2743 on 13 degrees of freedom
+## Multiple R-squared:  0.9772, Adjusted R-squared:  0.9755 
+## F-statistic: 557.3 on 1 and 13 DF,  p-value: 4.643e-12
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = Y ~ X, data = data2)
+## 
+## Coefficients:
+## (Intercept)            X  
+##      8.7125      -0.8134
+\end{verbatim}
+
+Didapatkan Model Regresi sebagai berikut: \[\hat Y = 8.7125-0.8134X\]
+
+\#Eksplorasi \#\# Plot Hubungan X dan Y Asumsi bentuk model regresi
+linear sederhana dengan plot antara X dan Y
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(}\AttributeTok{x=}\NormalTok{data2}\SpecialCharTok{$}\NormalTok{X,}\AttributeTok{y=}\NormalTok{data2}\SpecialCharTok{$}\NormalTok{Y)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Tugas-Analisis-Regresi-Pt-7_files/figure-latex/unnamed-chunk-14-1.pdf}
+
+\hypertarget{pemeriksaan-asumsi-1}{%
+\section{Pemeriksaan Asumsi}\label{pemeriksaan-asumsi-1}}
+
+\hypertarget{eksplorasi-kondisi-gauss-markov-1}{%
+\subsection{Eksplorasi Kondisi
+Gauss-Markov}\label{eksplorasi-kondisi-gauss-markov-1}}
+
+\hypertarget{plot-sisaan-vs-y-duga-1}{%
+\subsubsection{Plot sisaan vs Y duga}\label{plot-sisaan-vs-y-duga-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(model2,}\DecValTok{1}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Tugas-Analisis-Regresi-Pt-7_files/figure-latex/unnamed-chunk-15-1.pdf}
+
+\hypertarget{plot-sisaan-vs-urutan-1}{%
+\subsection{Plot sisaan vs urutan}\label{plot-sisaan-vs-urutan-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(}\AttributeTok{x =} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{dim}\NormalTok{(data2)[}\DecValTok{1}\NormalTok{],}
+     \AttributeTok{y =}\NormalTok{ model2}\SpecialCharTok{$}\NormalTok{residuals,}
+     \AttributeTok{type =} \StringTok{\textquotesingle{}b\textquotesingle{}}\NormalTok{, }
+     \AttributeTok{ylab =} \StringTok{"Residuals"}\NormalTok{,}
+     \AttributeTok{xlab =} \StringTok{"Observation"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Tugas-Analisis-Regresi-Pt-7_files/figure-latex/unnamed-chunk-16-1.pdf}
+
+\hypertarget{eksplorasi-normalitas-sisaan-dengan-qq-plot-1}{%
+\subsection{Eksplorasi Normalitas Sisaan dengan
+QQ-plot}\label{eksplorasi-normalitas-sisaan-dengan-qq-plot-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(model2,}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Tugas-Analisis-Regresi-Pt-7_files/figure-latex/unnamed-chunk-17-1.pdf}
+
+\hypertarget{uji-formal-kondisi-gauss-markov-1}{%
+\section{Uji Formal Kondisi
+Gauss-Markov}\label{uji-formal-kondisi-gauss-markov-1}}
+
+\hypertarget{nilai-harapan-sisaan-sama-dengan-nol-1}{%
+\subsection{1. Nilai harapan sisaan sama dengan
+nol}\label{nilai-harapan-sisaan-sama-dengan-nol-1}}
+
+\[
+H_0 : \text{Nilai harapan sisaan sama dengan 0}\\H_1 : \text{Nilai harapan tidak sama dengan 0}
+\]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{t.test}\NormalTok{(model2}\SpecialCharTok{$}\NormalTok{residuals,}\AttributeTok{mu =} \DecValTok{0}\NormalTok{,}\AttributeTok{conf.level =} \FloatTok{0.95}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  One Sample t-test
+## 
+## data:  model2$residuals
+## t = 2.0334e-16, df = 14, p-value = 1
+## alternative hypothesis: true mean is not equal to 0
+## 95 percent confidence interval:
+##  -0.1463783  0.1463783
+## sample estimates:
+##    mean of x 
+## 1.387779e-17
+\end{verbatim}
+
+Diketahui bahwa p-value \textgreater{} alpha, sehingga tak tolak
+\(H_0\). Oleh karena itu,dapat disimpulkan bahwa nilai harapan sisaan
+sama dengan nol
+
+\hypertarget{ragam-sisaan-homogen-1}{%
+\subsection{2.Ragam sisaan homogen}\label{ragam-sisaan-homogen-1}}
+
+\[
+H_0 : \text{Ragam sisaan homogen}\\H_1 : \text{Ragam sisaan tidak homogen}
+\]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ncvTest}\NormalTok{(model2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Non-constant Variance Score Test 
+## Variance formula: ~ fitted.values 
+## Chisquare = 2.160411, Df = 1, p = 0.14161
+\end{verbatim}
+
+Diketahui bahwa p-value \textgreater{} alpha, sehingga tak tolak
+\(H_0\). Oleh karena itu,dapat disimpulkan bahwa ragam sisaan homogen
+
+\hypertarget{sisaan-saling-bebas-1}{%
+\subsection{3. Sisaan saling bebas}\label{sisaan-saling-bebas-1}}
+
+\[
+H_0 : \text{Sisaan saling bebas}\\H_1 : \text{Sisaan tidak saling bebas}
+\]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dwtest}\NormalTok{(model2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Durbin-Watson test
+## 
+## data:  model2
+## DW = 2.6803, p-value = 0.8629
+## alternative hypothesis: true autocorrelation is greater than 0
+\end{verbatim}
+
+Diketahui bahwa p-value \textgreater{} alpha, sehingga tak tolak
+\(H_0\). Oleh karena itu,dapat disimpulkan bahwa sisaan saling bebas
+
+\hypertarget{uji-formal-normalitas-sisaan-1}{%
+\section{Uji Formal Normalitas
+Sisaan}\label{uji-formal-normalitas-sisaan-1}}
+
+\[ H_0 : \text{Sisaan menyebar normal}\\H_1 : \text{Sisaan tidak menyebar normal} \]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{shapiro.test}\NormalTok{(model2}\SpecialCharTok{$}\NormalTok{residuals)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Shapiro-Wilk normality test
+## 
+## data:  model2$residuals
+## W = 0.96504, p-value = 0.7791
+\end{verbatim}
+
+Berdasarkan Shapiro-Wilk normality test diketahui bahwa p-value
+\textgreater{} alpha, sehingga tak tolak \(H_0\). Oleh karena itu, dapat
+disimpulkan bahwa sisaan menyebar normal.
+
+Berdasarkan transformasi yang telah dilakukan didapat model regresi yang
+lebih baik dan efektif disertai dengan semua asumsi Gauss Markov dan
+Normalitas sudah terpenuhi dalam analisis regresi linear sederhana.
+Sehingga model regresi terbaik dari data ini adalah:
+\[\hat Y = 8.7125-0.8134X\]
+
+\end{document}
